@@ -28,3 +28,7 @@ Para finalizar os serviços, vá para janelas abertas com instâncias de produce
 ```sh
 docker-compose down
 ```
+
+## Exemplos
+
+1. [Introdução ao Kafka](./kafka-introduction/README.md)
