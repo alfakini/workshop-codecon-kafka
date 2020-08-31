@@ -2,8 +2,8 @@
 
 ## Dependências
 
-Os exemplos de código desse repositório dependem  do OpenJDK 11 e
-os serviços que precisamos executar do Docker.
+Para executar os exemplos de código desse repositório instale o OpenJDK 11 e
+o Docker.
 
 * [OpenJDK 11](https://adoptopenjdk.net/installation.html#x64_linux-jdk)
 * [Docker](https://docs.docker.com/get-docker/)
