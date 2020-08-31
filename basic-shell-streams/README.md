@@ -11,7 +11,7 @@ os detalhes de algo que aconteceu em algum momento no tempo. Um evento geralment
 indicando quando aconteceu.
 
 Na terminologia de streaming, um evento é gerado por um produtor (producer, publisher ou sender) e,
-em seguida, potencialmente processado por vários consumidores (consumers, sbscribers ou recipients).
+em seguida, potencialmente processado por vários consumidores (consumers, subscribers ou recipients).
 
 Em um sistema de arquivos, um nome de arquivo identifica um conjunto de registros relacionados.
 Em um sistema de streaming, eventos relacionado geralmente são agrupados em um tópico ou fluxo.
