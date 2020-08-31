@@ -31,8 +31,12 @@ docker-compose down
 
 ## Exemplos
 
+0. [TODO: Introdução aos Streams, Producers e Consumers]()
 1. [Introdução ao Kafka](./kafka-introduction/README.md)
 2. [Escrevendo Produtores e Consumidores](./kafka-consumer-producer-application/README.md)
+3. [TODO: Usando Kafka Stream]()
+4. [TODO: Usando ksqlDB]()
+6. [TODO: Convertendo uma aplicação monolito para microserviços]()
 
 ## Comandos básicos
 
