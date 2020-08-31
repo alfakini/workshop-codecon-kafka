@@ -1,0 +1,12 @@
+microservices
+kafka
+event-driven
+event-sourcing
+cqrs
+confluent
+ksqldb
+codecon:maior evento tech norte catarinense
+codecon:a dev couch conference
+workshops:Arquitetura event-driven com apache kafka
+workshops:Introdução ao cypress
+workshops:Flutter - 3 horas de handson

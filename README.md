@@ -32,3 +32,16 @@ docker-compose down
 ## Exemplos
 
 1. [Introdução ao Kafka](./kafka-introduction/README.md)
+2. [Escrevendo Produtores e Consumidores](./kafka-consumer-producer-application/README.md)
+
+## Comandos básicos
+
+Para fechar o console do consumer e producer do Kafka use `CTRL+C`.
+
+Para fechar o shell do container do Docker use `CTRL+D`.
+
+Para iniciar uma sessão bash no broker do Kafka digite:
+
+```sh
+docker-compose exec broker bash
+```

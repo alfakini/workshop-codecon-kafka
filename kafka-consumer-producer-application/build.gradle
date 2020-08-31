@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:4.0.2"
+    }
+}
+
+plugins {
+    id "java"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    jcenter()
+    maven { url "https://packages.confluent.io/maven" }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+
+dependencies {
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+    implementation "org.apache.kafka:kafka-streams:2.5.0"
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+task shadowJarConsumer(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = "codecon-consumer.jar"
+    manifest { attributes("Main-Class": "codecon.CodeconConsumer") }
+    from zipTree(shadowJar.archivePath)
+}
+
+task shadowJarProducer(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = "codecon-producer.jar"
+    manifest { attributes("Main-Class": "codecon.CodeconProducer") }
+    from zipTree(shadowJar.archivePath)
+}
