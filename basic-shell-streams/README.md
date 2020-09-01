@@ -36,7 +36,7 @@ touch events.txt
 tail -f events.txt
 ```
 
-Com esses dois comandos nós criamos o arquivo `events.txt` e criamos um output de dados que fica "pendurado" (attached).
+Com esses dois comandos nós criamos o arquivo `events.txt` e criamos um output de dados que fica inscrito (attached).
 
 Agora vamos criar o nosso producer:
 
@@ -45,6 +45,14 @@ echo "isso é um evento" >> events.txt
 ```
 
 Repare aqui que nós usamos o símbolo `>>` para adicionar uma linha ao final do arquivo.
+
+O Kafka nos permite criar consumers que leem apenas os novos eventos enviados após a inicialização,
+como é o caso do que acontece quando usamos o comando `tail -f`, ou ainda ler todos os eventos desde o começo
+do log. Para simular esse segundo caso, podemos usar o comando `cat`:
+
+```sh
+cat events.txt
+```
 
 Podemos ainda simular algo muito parecido com o que sistemas AMQ como o RabbitMQ fazem, usando o comando `nc` do UNIX.
 
