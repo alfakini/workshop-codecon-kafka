@@ -14,7 +14,7 @@ Na terminologia de streaming, um evento é gerado por um produtor (producer, pub
 em seguida, potencialmente processado por vários consumidores (consumers, subscribers ou recipients).
 
 Em um sistema de arquivos, um nome de arquivo identifica um conjunto de registros relacionados.
-Em um sistema de streaming, eventos relacionado geralmente são agrupados em um tópico ou fluxo.
+Em um sistema de streaming, eventos relacionados geralmente são agrupados em um tópico ou fluxo.
 
 Em princípio, um arquivo ou banco de dados é suficiente para conectar producers e consumers: um producer escreve
 cada evento que ele gera para o datastore e cada consumer periodicamente lê os eventos.
@@ -39,7 +39,7 @@ Agora vamos criar o nosso producer:
 echo "isso é um evento" >> events.txt
 ```
 
-Repare aqui que nós usamos o símbolo `>>` para criar uma nova linha no arquivo.
+Repare aqui que nós usamos o símbolo `>>` para adicionar uma linha ao final do arquivo.
 
 Podemos ainda simular algo muito parecido com o que sistemas AMQ como o RabbitMQ fazem, usando o comando `nc` do UNIX.
 
