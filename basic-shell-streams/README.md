@@ -16,8 +16,13 @@ em seguida, potencialmente processado por vários consumidores (consumers, subsc
 Em um sistema de arquivos, um nome de arquivo identifica um conjunto de registros relacionados.
 Em um sistema de streaming, eventos relacionados geralmente são agrupados em um tópico ou fluxo.
 
-Em princípio, um arquivo ou banco de dados é suficiente para conectar producers e consumers: um producer escreve
+Em princípio, um arquivo é suficiente para conectar producers e consumers: um producer escreve
 cada evento que ele gera para o datastore e cada consumer periodicamente lê os eventos.
+
+Sistemas mais complexos como o Kafka fazem uma implementação de um commit log. Um log é um registro
+contínuo e ordenado de transações. Commit logs são tradicionalmente usados em sistemas de banco de dados,
+para recuperação de falhas, todas as transações são escritas no log (rápido e fácil) antes de
+serem aplicadas (demorado).
 
 ## Testando essa ideia
 
