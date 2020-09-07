@@ -26,9 +26,16 @@ dependencies {
     implementation "org.apache.kafka:kafka-streams:2.5.0"
 }
 
+clean {
+    delete "build"
+    delete "bin"
+}
+
 shadowJar {
     mergeServiceFiles()
 }
+
+// CONSUMER
 
 task shadowJarConsumer(type: Jar, dependsOn: shadowJar) {
     archiveFileName = "codecon-consumer.jar"
@@ -36,8 +43,22 @@ task shadowJarConsumer(type: Jar, dependsOn: shadowJar) {
     from zipTree(shadowJar.archivePath)
 }
 
+task runConsumer(type: JavaExec) {
+  main = "codecon.CodeconConsumer"
+  classpath = sourceSets.main.runtimeClasspath
+  args = ["configuration/consumer.properties"]
+}
+
+// PRODUCER
+
 task shadowJarProducer(type: Jar, dependsOn: shadowJar) {
     archiveFileName = "codecon-producer.jar"
     manifest { attributes("Main-Class": "codecon.CodeconProducer") }
     from zipTree(shadowJar.archivePath)
+}
+
+task runProducer(type: JavaExec) {
+  main = "codecon.CodeconProducer"
+  classpath = sourceSets.main.runtimeClasspath
+  args = ["configuration/producer.properties", "configuration/events.txt"]
 }

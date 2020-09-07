@@ -1,51 +1,43 @@
 package codecon;
 
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Properties;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Properties;
+
 public class CodeconConsumer {
 
-  private volatile boolean keepConsuming = true;
-  private Consumer<String, String> consumer;
+    private final Consumer<String, String> consumer;
+    private final String topic;
+    private volatile boolean keepConsuming = true;
 
-  public CodeconConsumer(final Consumer<String, String> consumer) {
-    this.consumer = consumer;
-  }
-
-  public void run() {
-    try {
-      while (keepConsuming) {
-        final ConsumerRecords<String, String> events = consumer.poll(Duration.ofSeconds(1));
-        events.forEach(event -> System.out.println(event));
-      }
-    } finally {
-      consumer.close();
-    }
-  }
-
-  public void shutdown() {
-    keepConsuming = false;
-  }
-
-
-  public static void main(String[] args) throws Exception {
-    if (args.length < 1) {
-      throw new IllegalArgumentException(
-          "This program takes one argument: the path to an environment configuration file.");
+    public CodeconConsumer(Consumer<String, String> consumer, Properties props) {
+        this.topic = props.getProperty("input.topic.name");
+        this.consumer = consumer;
     }
 
-    final Properties props = Helpers.loadProperties(args[0]);
-    final String topic = props.getProperty("input.topic.name");
+    public static void main(String[] args) throws Exception {
+        if (args.length < 1) {
+            throw new IllegalArgumentException("This program takes one argument: " +
+                    "the path to an environment configuration file.");
+        }
 
-    final Consumer<String, String> consumer = new KafkaConsumer<>(props);
-    consumer.subscribe(Arrays.asList(topic));
+        Properties props = Helpers.loadProperties(args[0]);
 
-    final CodeconConsumer application = new CodeconConsumer(consumer);
-    Runtime.getRuntime().addShutdownHook(new Thread(application::shutdown));
-    application.run();
-  }
+        CodeconConsumer application = new CodeconConsumer(new KafkaConsumer<>(props), props);
+        Runtime.getRuntime().addShutdownHook(new Thread(application::shutdown));
+
+        application.run();
+    }
+
+    public void run() {
+        // TODO Implementar
+    }
+
+    public void shutdown() {
+        keepConsuming = false;
+    }
 }

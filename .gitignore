@@ -7,4 +7,10 @@
 *.zip
 *.tar.gz
 *.rar
-*build/
+*build
+*bin
+*.idea
+*.classpath
+*.gradle
+*.project
+*.settings
