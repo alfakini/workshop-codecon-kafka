@@ -26,6 +26,9 @@ docker-compose exec broker kafka-topics --create --topic codecon-kafka-consumer-
 
 ## Implementando o Consumer
 
+Com este consumer queremos inicialmente apenas inspecionar os eventos que estão chegando através do tópico `codecon-kafka-consumer-producer`.
+Podemos usar um `System.out.println`. Lembre-se de subscrever ao tópico.
+
 Precisamos primeiro compilar o projeto e criar um arquivo jar executável para o consumer:
 
 ```console
@@ -56,6 +59,9 @@ root@broker:/# kafka-console-producer --topic codecon-kafka-consumer-producer --
 ```
 
 ## Implementando o Producer
+
+Com este producer, queremos ler os eventos de um arquivo e enviar em um formato válido `key-value` os dados através do tópico `codecon-kafka-consumer-producer`.
+Precisamos criar um objeto do tipo `ProducerRecord` para ser enviado.
 
 Precisamos compilar o projeto e criar um arquivo jar executável para o producer:
 

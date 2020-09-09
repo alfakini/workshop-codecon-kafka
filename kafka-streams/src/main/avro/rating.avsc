@@ -1,0 +1,15 @@
+{
+  "namespace": "codecon.avro",
+  "type": "record",
+  "name": "Rating",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": "long"
+    },
+    {
+      "name": "rating",
+      "type": "double"
+    }
+  ]
+}

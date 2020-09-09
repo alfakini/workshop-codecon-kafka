@@ -1,0 +1,10 @@
+{
+  "namespace": "codecon.avro",
+  "type": "record",
+  "name": "Event",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "title", "type": "string"},
+    {"name": "type", "type": "string"}
+  ]
+}
