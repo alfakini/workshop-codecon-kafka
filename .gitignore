@@ -11,6 +11,6 @@
 *bin
 *.idea
 *.classpath
-*.gradle
+*.gradle/
 *.project
 *.settings

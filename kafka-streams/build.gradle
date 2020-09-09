@@ -1,0 +1,83 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.15.1"
+        classpath "com.github.jengelman.gradle.plugins:shadow:4.0.2"
+    }
+}
+
+plugins {
+    id "java"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    jcenter()
+    maven { url "https://packages.confluent.io/maven" }
+}
+
+apply plugin: "com.commercehub.gradle.plugin.avro"
+apply plugin: "com.github.johnrengelman.shadow"
+
+dependencies {
+    implementation "org.apache.avro:avro:1.8.2"
+    implementation "org.slf4j:slf4j-simple:1.7.30"
+    implementation "org.apache.kafka:kafka-streams:2.5.0"
+    implementation "io.confluent:kafka-streams-avro-serde:5.5.0"
+    implementation "com.typesafe:config:1.4.0"
+}
+
+clean {
+    delete "build"
+    delete "bin"
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+// TRANSFORM STREAM APPLICATION
+
+task shadowJarTransformStream(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = "codecon-transform-stream.jar"
+    manifest { attributes("Main-Class": "codecon.CodeconTransformStream") }
+    from zipTree(shadowJar.archivePath)
+}
+
+task runTransformStream(type: JavaExec) {
+  main = "codecon.CodeconTransformStream"
+  classpath = sourceSets.main.runtimeClasspath
+  args = ["configuration/codecon-transform-stream.properties"]
+}
+
+// AVERAGE STREAM APPLICATION
+
+task shadowJarAverageStream(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = "codecon-average-stream.jar"
+    manifest { attributes("Main-Class": "codecon.CodeconAverageStream") }
+    from zipTree(shadowJar.archivePath)
+}
+
+task runAverageStream(type: JavaExec) {
+  main = "codecon.CodeconAverageStream"
+  classpath = sourceSets.main.runtimeClasspath
+  args = ["configuration/codecon-average-stream.properties"]
+}
+
+// JOIN STREAM APPLICATION
+
+task shadowJarJoinStream(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = "codecon-join-stream.jar"
+    manifest { attributes("Main-Class": "codecon.CodeconJoinStream") }
+    from zipTree(shadowJar.archivePath)
+}
+
+task runJoinStream(type: JavaExec) {
+  main = "codecon.CodeconJoinStream"
+  classpath = sourceSets.main.runtimeClasspath
+  args = ["configuration/codecon-join-stream.properties"]
+}
